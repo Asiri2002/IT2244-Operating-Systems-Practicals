@@ -1,0 +1,139 @@
+//01
+#include<stdio.h>
+#include<unistd.h>
+int main(){
+	fork();
+	printf("Hello World!\n");
+}
+```
+Answer :
+```
+asiri@DESKTOP-0MK28KD:~$ vi ex2fork.c
+asiri@DESKTOP-0MK28KD:~$ gcc ex2fork.c -o ex2fork
+asiri@DESKTOP-0MK28KD:~$ ./ex2fork
+Hello World!
+Hello World!
+asiri@DESKTOP-0MK28KD:~$
+```
+```
+//02
+#include<stdio.h>
+#include<unistd.h>
+int main(){
+	fork();
+	fork();
+	printf("Hello World!\n");
+}
+```
+Answer :
+```
+asiri@DESKTOP-0MK28KD:~$ vi ex3fork.c
+asiri@DESKTOP-0MK28KD:~$ gcc ex3fork.c -o ex3fork
+asiri@DESKTOP-0MK28KD:~$ ./ex3fork
+Hello World!
+Hello World!
+Hello World!
+asiri@DESKTOP-0MK28KD:~$ Hello World!
+
+asiri@DESKTOP-0MK28KD:~$ ./ex3fork
+Hello World!
+Hello World!
+Hello World!
+Hello World!
+asiri@DESKTOP-0MK28KD:~$
+```
+```
+//03
+#include<stdio.h>
+#include<unistd.h>
+int main(){
+	int f = fork();
+	if(f==0){
+		printf("I'm the child!\n");
+	}
+	else{
+		printf("I'm the parent!\n");
+	}
+	return 0;
+}
+```
+Answer :
+```
+asiri@DESKTOP-0MK28KD:~$ vi ex4fork.c
+asiri@DESKTOP-0MK28KD:~$ gcc ex4fork.c -o ex4fork
+asiri@DESKTOP-0MK28KD:~$ ./ex4fork
+I'm the parent!
+I'm the child!
+```
+```
+//04
+#include<stdio.h>
+#include<unistd.h>
+int main(){
+	int f = fork();
+	if(f==0){
+		printf("I'm the child!\n");
+		int csum;
+		for(int i=1; i<=5; i++){
+			printf("%d ", i);
+			csum+=i;
+		}
+		printf("\nSummation of child process: %d\n",csum);
+	}
+	else{
+		printf("I'm the parent!\n");
+		int psum;
+		for(int i=6; i<=10; i++){
+			printf("%d ", i);
+			psum+=i;
+		}
+		printf("\nSummation of parent process: %d\n",psum);
+	}
+	return 0;
+}
+```
+Answer :
+```
+asiri@DESKTOP-0MK28KD:~$ vi ex5fork.c
+asiri@DESKTOP-0MK28KD:~$ gcc ex5fork.c -o ex5fork
+asiri@DESKTOP-0MK28KD:~$ ./ex5fork
+I'm the parent!
+I'm the child!
+6 7 8 9 10
+Summation of parent process: 32807
+1 2 3 4 5
+Summation of child process: 32746
+```
+```
+//05
+#include<stdio.h>
+#include<unistd.h>
+int main(){
+	int n;
+	int f = fork();
+	if(f==0){
+		n = 1;
+	}
+	else{
+		n = 6;
+	}
+	
+	int sum=0;
+	for(int i=n; i<n+5; i++){
+		printf("%d ", i);
+		sum+=i;
+	}
+	printf("\nSummation : %d\n",sum);
+		
+	return 0;
+}
+```
+Answer :
+```
+asiri@DESKTOP-0MK28KD:~$ vi ex6fork.c
+asiri@DESKTOP-0MK28KD:~$ gcc ex6fork.c -o ex6fork
+asiri@DESKTOP-0MK28KD:~$ ./ex6fork
+6 7 8 9 10
+Summation : 40
+1 2 3 4 5
+Summation : 15
